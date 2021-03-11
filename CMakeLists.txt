@@ -16,8 +16,18 @@ find_package(GLFW3 REQUIRED)
 find_package(GLM REQUIRED)
 
 include_directories("glad/include/")
+include_directories("stb_image")
 
-add_executable(final_project main.cpp glad.c VoxwellEngine/VoxwellEngine.cpp VoxwellEngine/VoxwellEngine.h)
+add_executable(final_project main.cpp glad.c glad/include/glad/glad.h glad/include/KHR/khrplatform.h
+        VoxwellEngine/RenderObject.cpp VoxwellEngine/RenderObject.hpp VoxwellEngine/VertexDataObject.hpp
+        VoxwellEngine/VertexAttribute.hpp VoxwellEngine/CameraObject.hpp
+        VoxwellEngine/TextureObject.hpp VoxwellEngine/TextureObject.cpp
+        stb_image/stb_image.h
+        VoxwellEngine/Shapes/3D/cube.hpp VoxwellEngine/Shapes/3D/cube.cpp
+        VoxwellEngine/VoxwellEngine.cpp VoxwellEngine/VoxwellEngine.h VoxwellEngine/Shader.cpp VoxwellEngine/Shader.h VoxwellEngine/ShaderProgram.cpp VoxwellEngine/ShaderProgram.h VoxwellEngine/ves.h VoxwellEngine/Voxel.cpp VoxwellEngine/Voxel.h)
 
 target_link_libraries(final_project glfw)
 target_link_libraries(final_project OpenGL::GL)
+target_link_libraries(final_project ${COCOA_LIBRARIES})
+target_link_libraries(final_project ${IOKIT_LIBRARIES})
+target_link_libraries(final_project ${COREVIDEO_LIBRARIES})

@@ -5,19 +5,18 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "MaxwellEngine/MaxwellEngine.hpp"
-#include "MaxwellEngine/ShaderFile.hpp"
+#include "VoxwellEngine/VoxwellEngine.h"
+#include "VoxwellEngine/Shapes/3D/cube.hpp"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    glm::vec3 v(0.0, 0.0, 0.0);
+    Shader vertex_shader("/Users/griffin/Stanford/LOA/winter/CS 248/final project/VoxwellEngine/shaders/shader.vert");
+    Shader fragment_shader("/Users/griffin/Stanford/LOA/winter/CS 248/final project/VoxwellEngine/shaders/shader.frag");
 
-    mes::ShaderFile vertexShaderFile("/Users/griffin/Documents/cpp-projects/MaxwellEngine/MaxwellEngine/Shaders/vertexShader.glsl");
+    VoxwellEngine engine(800, 600, vertex_shader, fragment_shader);
 
-    mes::ShaderFile fragmentShaderFile("/Users/griffin/Documents/cpp-projects/MaxwellEngine/MaxwellEngine/Shaders/fragmentShader.glsl");
+    cube c;
 
-    // Construct an engine instance with vertex and fragment shader
-    mes::MaxwellEngine engine(vertexShaderFile, fragmentShaderFile);
+    engine.start_render_loop();
 
     return 0;
 }
