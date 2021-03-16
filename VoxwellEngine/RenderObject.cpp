@@ -78,10 +78,10 @@ void RenderObject::render(const unsigned int shaderProgram_id, const CameraObjec
 {
     //TODO optimize when to multiply by modelMatrix. Only multiply when changed.
 
-    glm::mat4x4 mvp = camera.getProjectionMatrix() * camera.getViewMatrix() * modelMatrix;
+    glm::mat4x4 mvp = camera.getProjectionMatrix() * (camera.getViewMatrix() * modelMatrix);
 
     // set uniform MVP
-    glUniformMatrix4fv(glGetUniformLocation(shaderProgram_id, "mvp"), 1, GL_FALSE, glm::value_ptr(camera.getProjectionMatrix()));
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram_id, "mvp"), 1, GL_FALSE, glm::value_ptr(mvp));
 
     int count(0);
     // Empty texture

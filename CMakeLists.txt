@@ -24,7 +24,7 @@ add_executable(final_project main.cpp glad.c glad/include/glad/glad.h glad/inclu
         VoxwellEngine/TextureObject.hpp VoxwellEngine/TextureObject.cpp
         stb_image/stb_image.h
         VoxwellEngine/Shapes/3D/cube.hpp VoxwellEngine/Shapes/3D/cube.cpp
-        VoxwellEngine/VoxwellEngine.cpp VoxwellEngine/VoxwellEngine.h VoxwellEngine/Shader.cpp VoxwellEngine/Shader.h VoxwellEngine/ShaderProgram.cpp VoxwellEngine/ShaderProgram.h VoxwellEngine/ves.h VoxwellEngine/Voxel.cpp VoxwellEngine/Voxel.h)
+        VoxwellEngine/VoxwellEngine.cpp VoxwellEngine/VoxwellEngine.h VoxwellEngine/Shader.cpp VoxwellEngine/Shader.h VoxwellEngine/ShaderProgram.cpp VoxwellEngine/ShaderProgram.h VoxwellEngine/ves.h VoxwellEngine/Voxel.cpp VoxwellEngine/Voxel.h VoxwellEngine/Chunk.cpp VoxwellEngine/Chunk.h VoxwellEngine/DiscWorld.cpp VoxwellEngine/DiscWorld.h)
 
 target_link_libraries(final_project glfw)
 target_link_libraries(final_project OpenGL::GL)

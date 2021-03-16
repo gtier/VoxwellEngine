@@ -2,9 +2,7 @@
 //  CameraObject.hpp
 //  MaxwellEngine
 //
-//  Created by Griffin Dunaif on 2/19/19.
-//  Copyright © 2019 Griffin Dunaif. All rights reserved.
-//
+// This is taken from LearnOpenGL and from a renderer I started in highschool
 
 #ifndef CameraObject_hpp
 #define CameraObject_hpp
@@ -21,9 +19,10 @@ private:
     glm::vec3 position, front, target, universalUp, right, up;
     float pitch, yaw, prevX, prevY, sensitivity, speed;
     glm::mat4 viewMatrix, projectionMatrix;
+
 public:
     CameraObject(int width, int height)
-    : viewMatrix(1.0f), position(0.0f, 0.0f, 2.0f), target(0.0f, 0.0f, 0.0f), universalUp(0.0f, 1.0f, 0.0f), prevX(0.0f), prevY(0.0f), sensitivity(0.025f), speed(2.0f)
+    : viewMatrix(1.0f), position(0.0f, 0.0f, 2.0f), target(0.0f, 0.0f, 0.0f), universalUp(0.0f, 1.0f, 0.0f), prevX(0.0f), prevY(0.0f), sensitivity(0.05f), speed(5.0f)
     {
         projectionMatrix = glm::perspective(glm::radians(45.0f), (float)width/(float)height, 0.1f, 1000.0f);
         front = glm::vec3(0.0f, 0.0f, -1.0f);
