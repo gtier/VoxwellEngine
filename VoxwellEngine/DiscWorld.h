@@ -6,6 +6,7 @@
 #define FINAL_PROJECT_DISCWORLD_H
 
 #include "ves.h"
+#include "VoxwellEngine.h"
 #include "Chunk.h"
 #include <vector>
 #include <memory>
@@ -16,6 +17,8 @@ using namespace std;
 class DiscWorld {
 public:
     DiscWorld(glm::ivec3 center, glm::ivec3 normal, int radius);
+
+    void render(VoxwellEngine& engine);
 private:
     glm::ivec3 _center, _normal;
     int _radius;

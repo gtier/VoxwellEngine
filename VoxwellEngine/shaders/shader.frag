@@ -19,7 +19,7 @@ in vec3 normal;
 
 void main()
 {
-    vec3 light = vec3(0, 10, 0);
+    vec3 light = vec3(0.0, 10000.0, 0.0);
     vec3 pos_to_light = light - pos;
     pos_to_light = normalize(pos_to_light);
 
