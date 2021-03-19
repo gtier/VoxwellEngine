@@ -10,6 +10,7 @@
 #include "Voxel.h"
 #include "VoxwellEngine.h"
 #include "VoxelFace.h"
+#include "SpaceMapping.h"
 
 using namespace std;
 
@@ -20,8 +21,7 @@ public:
     // Populate chunk with voxel data
     void populate();
 
-    void set_chunk_space_mapping(bool func(glm::ivec3 v_chunk_location));
-    void set_world_space_mapping(bool func(glm::ivec3 v_world_location));
+    void set_space_mapping(const SpaceMapping& mapping);
 
     void render(VoxwellEngine& engine);
 
@@ -58,14 +58,13 @@ private:
     int _width, _height, _depth;
     // location is position of bottom-left-front corner of chunk
     glm::ivec3 _location;
+    SpaceMapping _mapping;
 
     // one-to-one mapping from voxels to ids
     // Each voxel index corresponds to a render object whose id is stored in _ids
     vector<Voxel> _voxels;
     vector<size_t> _ids;
     int _size;
-    bool (*_chunk_space_mapping)(glm::ivec3 v_chunk_location);
-    bool (*_world_space_mapping)(glm::ivec3 v_world_location);
 
     // mesh
     vector<unsigned int> _indices;

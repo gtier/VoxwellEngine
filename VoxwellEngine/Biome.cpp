@@ -5,9 +5,11 @@
 #include "Biome.h"
 
 Biome::Biome(glm::ivec3 location, glm::ivec3 chunk_dim, glm::ivec2 biome_dim)
-: _location(location), _chunk_dim(chunk_dim), _biome_dim(biome_dim), _world_space_mapping(nullptr),
-_biome_space_mapping(nullptr)
+: _location(location), _chunk_dim(chunk_dim), _biome_dim(biome_dim)
 {
+    // Ensure mapping is in biome location
+    _mapping.set_basis_center(location);
+
     int biome_width = biome_dim.x;
     int biome_depth = biome_dim.y;
 
@@ -25,9 +27,6 @@ _biome_space_mapping(nullptr)
 }
 
 void Biome::populate() {
-    if (!_world_space_mapping) {
-        return;
-    }
 
     int biome_width = _biome_dim.x;
     int biome_depth = _biome_dim.y;
@@ -36,7 +35,7 @@ void Biome::populate() {
             int index = chunk_index(x, y);
             unique_ptr<Chunk>& c = _chunks[index];
 
-            c->set_world_space_mapping(_world_space_mapping);
+            c->set_space_mapping(_mapping);
             c->populate();
         }
     }
@@ -54,8 +53,10 @@ void Biome::render(VoxwellEngine &engine) {
     }
 }
 
-void Biome::set_world_space_mapping(bool (*func)(glm::ivec3)) {
-    _world_space_mapping = func;
+void Biome::set_space_mapping(bool (*mapping)(ivec3 v_world_location)) {
+    // Only allow update to mapping function not basis center
+    // We want basis center to always be basis center of biome
+    _mapping.set_mapping(mapping);
 }
 
 glm::vec3 Biome::world_units_to_world_space(glm::ivec2 world_units) {

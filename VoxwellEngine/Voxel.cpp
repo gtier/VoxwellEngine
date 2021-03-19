@@ -114,14 +114,13 @@ bool Voxel::is_down_visible() {
 
 optional<size_t> Voxel::render(VoxwellEngine& engine) {
     if (is_visible()) {
-        if (is_front_visible()) {
-            face f(_location);
-            size_t id = engine.create_render_object(f.get_verts(), f.get_indices());
-            RenderObject &obj = engine.get_render_object(id);
-            obj.setModelMatrix(f.get_model_matrix());
+        cube c;
+        c.translate(_location);
+        size_t id = engine.create_render_object(c.getVerts(), c.getIndices());
+        RenderObject &obj = engine.get_render_object(id);
+        obj.setModelMatrix(c.getTranslation());
 
-            return id;
-        }
+        return id;
 
         return nullopt;
     }

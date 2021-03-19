@@ -5,7 +5,7 @@
 #include "Chunk.h"
 
 Chunk::Chunk(glm::ivec3 location, int width, int height, int depth)
-: _width(width), _height(height), _depth(depth), _world_space_mapping(nullptr),
+: _width(width), _height(height), _depth(depth),
 _location(location), _model(glm::identity<glm::mat4>())
 {
     _size = width * height * depth;
@@ -15,9 +15,6 @@ _location(location), _model(glm::identity<glm::mat4>())
 }
 
 void Chunk::populate() {
-    if (!_world_space_mapping) {
-        return;
-    }
 
     for (int x = 0; x < _width; ++x) {
         for (int y = 0; y < _height; ++y) {
@@ -27,7 +24,7 @@ void Chunk::populate() {
                 glm::ivec3 v_world_space_location = chunk_to_world_space_transform(v_chunk_space_location);
                 Voxel v(v_world_space_location);
 
-                if (_world_space_mapping(v_world_space_location)) {
+                if (_mapping(v_world_space_location)) {
                     v.set_visibility(true);
                 } else {
                     v.set_visibility(false);
@@ -77,6 +74,10 @@ Voxel& Chunk::get_voxel(glm::ivec3 chunk_space_location) {
 
 Voxel& Chunk::get_voxel(int x, int y, int z) {
     return _voxels[voxel_index(x, y, z)];
+}
+
+void Chunk::set_space_mapping(const SpaceMapping &mapping) {
+    _mapping = mapping;
 }
 
 void Chunk::render(VoxwellEngine &engine) {
@@ -180,6 +181,12 @@ void Chunk::render(VoxwellEngine &engine) {
     }
 
     unique_ptr<vector<float> > tmp_uptr = unique_ptr<vector<float> >(mesh_verts);
+
+    // Don't render if not enough verts
+    if (tmp_uptr->size() < 8) {
+        return;
+    }
+
     VDOFloat tmp_vdo(tmp_uptr);
     tmp_vdo.addVertexType(VDOFloat::VEC3);
     tmp_vdo.addVertexType(VDOFloat::VEC2);
@@ -214,12 +221,4 @@ void Chunk::add_face(glm::ivec3 location, Face face,
 
     // update index whenever face added
     output_index++;
-}
-
-void Chunk::set_chunk_space_mapping(bool (*func)(glm::ivec3)) {
-    _chunk_space_mapping = func;
-}
-
-void Chunk::set_world_space_mapping(bool (*func)(glm::ivec3)) {
-    _world_space_mapping = func;
 }

@@ -13,7 +13,7 @@ VoxwellEngine::VoxwellEngine(int width, int height, Shader& vertex_shader, Shade
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE); //This line is required for mac computers
-    _engine_window = glfwCreateWindow(width, height, "MaxwellEngine", NULL, NULL);
+    _engine_window = glfwCreateWindow(width, height, "VoxwellEngine", NULL, NULL);
 
     if (_engine_window == NULL) {
         glfwTerminate();

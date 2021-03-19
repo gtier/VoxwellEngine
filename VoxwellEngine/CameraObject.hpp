@@ -94,7 +94,13 @@ public:
         }else if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
             position -= displacement * universalUp;
         }
-        
+
+        if ((glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)) {
+            setSpeed(20.0f);
+        } else if ((glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)) {
+            setSpeed(5.0f);
+        }
+
         updateViewMatrix();
     }
     

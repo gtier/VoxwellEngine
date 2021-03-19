@@ -24,5 +24,6 @@ void main()
     pos_to_light = normalize(pos_to_light);
 
     float fraction_of_light = dot(pos_to_light, normal);
-    fragment_color = vec4(0.5, 0.22 + fraction_of_light * 0.78, 0.01, 1.0);
+//    fragment_color = vec4(0.5, 0.22 + fraction_of_light * 0.78, 0.01, 1.0);
+    fragment_color = vec4(normal, 1.0);
 }
